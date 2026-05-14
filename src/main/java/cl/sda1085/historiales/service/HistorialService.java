@@ -2,6 +2,7 @@ package cl.sda1085.historiales.service;
 
 import cl.sda1085.historiales.dto.HistorialRequestDTO;
 import cl.sda1085.historiales.dto.HistorialResponseDTO;
+import cl.sda1085.historiales.exception.ResourceNotFoundException;
 import cl.sda1085.historiales.model.Historial;
 import cl.sda1085.historiales.repository.HistorialRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,11 @@ public class HistorialService {
 
     }
 
-    public Optional<HistorialResponseDTO> obtenerPorId(Long id) {
+    public HistorialResponseDTO obtenerPorId(Long id) {
         log.info("Buscando registro de historial ID: {}", id);
-        return historialRepository.findById(id).map(this::convertirADTO);
+        return historialRepository.findById(id)
+                .map(this::convertirADTO)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el registro"));
     }
 
     @Transactional
@@ -62,7 +65,7 @@ public class HistorialService {
     }
 
     @Transactional
-    public Optional<HistorialResponseDTO> actualizar(Long id, HistorialRequestDTO dto) {
+    public HistorialResponseDTO actualizar(Long id, HistorialRequestDTO dto) {
         log.info("Actualizando registro de historial ID: {}", id);
         return historialRepository.findById(id).map(existente -> {
             existente.setAccion(dto.getAccion());
@@ -70,7 +73,8 @@ public class HistorialService {
             existente.setIdEntidad(dto.getIdEntidad());
             existente.setIdUsuario(dto.getIdUsuario());
             return convertirADTO(historialRepository.save(existente));
-        });
+        })
+                .orElseThrow(()->new ResourceNotFoundException("No se puede actualizar: El ID " + id + "no existe"));
     }
 
     @Transactional
