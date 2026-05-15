@@ -1,8 +1,11 @@
 package cl.sda1085.historiales.exception;
 
-public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-        super(message);
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(Long id) {
+        super("No se encontró el registro de historial con ID: " + id);
     }
 }

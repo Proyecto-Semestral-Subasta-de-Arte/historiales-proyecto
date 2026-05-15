@@ -13,7 +13,7 @@ public interface HistorialRepository extends JpaRepository<Historial, Long> {
     //Buscar todas las acciones realizadas por un usuario
     List<Historial> findByIdUsuario(Long idUsuario);
 
-    //Buscar por acción específica
+    //Buscar historial por acción específica
     List<Historial> findByAccion(String accion);
 
     //Contar cuántas veces se ha afectado una entidad específica
