@@ -6,31 +6,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
 @Table(name = "historiales")
-
 public class Historial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String accion; // "creación", "actualización", "eliminación", "oferta_recibida", "oferta_superada", "pago_exitoso", "pago_fallido", "subasta_finalizada","inicio_sesion"
+    @Column(name = "id_usuario", nullable = false)
+    private Long idUsuario;
 
-    @Column(nullable = false)
-    private String entidadAfectada; // "subasta", "usuario", "pago", "producto", "oferta"
+    @Column(nullable = false, length = 100)
+    private String accion;  //Creación, actualización, eliminación, oferta recibida, oferta superada, pago exitoso, pago fallido, subasta finalizada e inicio sesion
 
-    @Column(nullable = false)
-    private Long idEntidad; // ID de entidad afectada
+    @Column(name = "entidad_afectada", nullable = false, length = 50)
+    private String entidadAfectada;  //Subasta, usuario, pago, producto u oferta
 
-    @Column(nullable = false)
-    private Long idUsuario; // Quién generó la acción
+    @Column(name = "id_entidad", nullable = false)
+    private Long idEntidad;  //ID de entidad afectada
 
     @Column(nullable = false)
     private LocalDateTime fecha;
