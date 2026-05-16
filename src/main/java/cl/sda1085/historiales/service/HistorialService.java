@@ -34,7 +34,10 @@ public class HistorialService {
                 .build();
     }
 
+
+    //------------------------------
     //CRUD estándar
+    //------------------------------
 
     //Obtener todos los historiales
     public List<HistorialResponseDTO> obtenerTodos() {
@@ -90,7 +93,10 @@ public class HistorialService {
         historialRepository.deleteById(id);
     }
 
+
+    //------------------------------
     //CRUD personalizado
+    //------------------------------
 
     //Buscar todos las acciones realizadas por un usuario
     public List<HistorialResponseDTO> obtenerPorUsuario(Long idUsuario) {

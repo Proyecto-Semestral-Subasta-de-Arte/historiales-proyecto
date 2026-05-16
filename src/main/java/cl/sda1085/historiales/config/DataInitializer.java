@@ -21,14 +21,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+
         if (historialRepository.count() > 0) {
             log.info("La base de datos de historial ya contiene datos. Omitiendo inicialización.");
             return;
         }
-
         log.info("Iniciando la creación de registros de auditoría...");
 
-        //La fecha se autogenera mediante @PrePersist
+        //Fecha se autogenera mediante @PrePersist
 
         //Inicio de sesión del administrador
         Historial h1 = new Historial(

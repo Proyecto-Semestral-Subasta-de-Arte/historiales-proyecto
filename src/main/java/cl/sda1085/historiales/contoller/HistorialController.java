@@ -19,7 +19,10 @@ public class HistorialController {
     //Conexión con 'service'
     private final HistorialService historialService;
 
+
+    //------------------------------
     //CRUD estándar
+    //------------------------------
 
     //Obtener todos los historiales
     @GetMapping
@@ -62,7 +65,9 @@ public class HistorialController {
     }
 
 
+    //------------------------------
     //CRUD personalizado
+    //------------------------------
 
     //Buscar todos las acciones realizadas por un usuario
     @GetMapping("/usuario/{idUsuario}")
